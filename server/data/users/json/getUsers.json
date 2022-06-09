@@ -1,19 +1,4 @@
-{
-    "data": {
-      "users": [
-        {
-          "id": 1,
-          "name": "Akash",
-          "email": "akash@gmail.com",
-          "age": 30
-        },
-        {
-          "id": 2,
-          "name": "Sachin",
-          "email": "sachin@gmail.com",
-          "age": 27
-        }
-      ]
-    }
-  }
+
   
+
+{"data": [1, 2, 3]}
