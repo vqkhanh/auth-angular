@@ -11,6 +11,11 @@ server.get('/api/users', (req, res, next) => {
   res.status(200).send(userData.getUsers);
 });
 
+server.post('/api/authenticate', (req, res, next) => {
+  console.log("req",req.body);
+  res.status(200).send(userData.getAuthen);
+});
+
 server.listen(3000, () => {
   console.log('JSON server listening on port 3000');
 });
