@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,18 @@ export class AuthService {
   login(credentials: string) { 
     console.log("credentials",credentials)
     return this.httpCilent.post('http://localhost:3000/api/authenticate', 
-       credentials);
+       credentials)
+       .pipe(map((res:any) => {
+        console.log("res:",res);
+        if(res && res?.token){
+          localStorage.setItem('token', res.token);
+          return true;
+        }
+        else{
+          return false;
+        }
+        
+      }));
    }
 
    logout() { 

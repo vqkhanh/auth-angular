@@ -13,7 +13,12 @@ server.get('/api/users', (req, res, next) => {
 
 server.post('/api/authenticate', (req, res, next) => {
   console.log("req",req.body);
-  res.status(200).send(userData.getAuthen);
+  if(req.body.email == userData.getAuthen.email && req.body.password == userData.getAuthen.password){
+    res.status(200).send({"token":userData.getAuthen.token});
+  }
+  else{ 
+    res.status(200).send();
+  }
 });
 
 server.listen(3000, () => {
