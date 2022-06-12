@@ -14,6 +14,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SignupComponent } from './signup/signup.component';
 import { OrderService } from './services/order.service';
 import { FormsModule } from '@angular/forms';
+import { JwtModule } from "@auth0/angular-jwt";
+
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 
 @NgModule({
   declarations: [
@@ -35,7 +40,14 @@ import { FormsModule } from '@angular/forms';
       { path: 'admin', component: AdminComponent },
       { path: 'login', component: LoginComponent },
       { path: 'no-access', component: NoAccessComponent }
-    ])
+    ]),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+      //  allowedDomains: ["http://localhost:4200/"],
+        //disallowedRoutes: ["http://example.com/examplebadroute/"],
+      },
+    }),
   ],
   providers: [
     OrderService,
