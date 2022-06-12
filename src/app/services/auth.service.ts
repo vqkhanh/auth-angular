@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,10 @@ import { map } from 'rxjs';
 @Injectable()
 export class AuthService {
 
-  constructor(private httpCilent: HttpClient) { }
+  constructor(
+    private httpCilent: HttpClient,
+    public jwtHelper: JwtHelperService
+    ) { }
 
   // login(credentials: any) { 
   //   return this.httpCilent.post('/api/authenticate', 
@@ -38,6 +43,6 @@ export class AuthService {
    }
  
    isLoggedIn() { 
-     return false;
+    return this.jwtHelper.isTokenExpired();
    }
 }
