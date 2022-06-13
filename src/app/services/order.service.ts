@@ -1,5 +1,6 @@
+// import { BaseRequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 
 @Injectable({
@@ -17,7 +18,10 @@ export class OrderService {
   // }
 
   getOrders() { 
-    return this.httpCilent.get('http://localhost:3000/api/users')
+    let token = localStorage.getItem('token');
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token); 
+
+    return this.httpCilent.get('http://localhost:3000/api/users', {headers:headers})
       // .map(response => response.json());
   }
 

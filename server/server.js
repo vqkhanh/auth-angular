@@ -1,3 +1,4 @@
+const { read } = require('fs');
 const jsonServer = require('json-server');
 const middleware = jsonServer.defaults();
 const server = jsonServer.create();
@@ -8,7 +9,13 @@ server.use(jsonServer.bodyParser);
 const userData = require('../server/data/users');
 
 server.get('/api/users', (req, res, next) => {
-  res.status(200).send(userData.getUsers);
+  if ( req.method  == 'GET' ){
+      if(req.get('Authorization') == 'Bearer ' + userData.getAuthen.token)
+      {
+        return res.status(200).send(userData.getUsers);
+      }
+  }
+  return res.status(200).send();
 });
 
 server.post('/api/authenticate', (req, res, next) => {

@@ -1,3 +1,4 @@
+import { AdminGuardService } from './services/admin-guard.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgModule } from '@angular/core';
@@ -38,7 +39,7 @@ export function tokenGetter() {
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] },
+      { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService, AdminGuardService] },
       { path: 'login', component: LoginComponent },
       { path: 'no-access', component: NoAccessComponent }
     ]),
@@ -53,7 +54,8 @@ export function tokenGetter() {
   providers: [
     OrderService,
     AuthService, 
-    AuthGuardService
+    AuthGuardService,
+    AdminGuardService
   ],
   bootstrap: [AppComponent]
 })
